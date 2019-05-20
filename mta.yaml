@@ -1,0 +1,36 @@
+ID: GeneraliTreinamentoSAPHANA00
+_schema-version: '2.1'
+parameters:
+   deploy_mode: html5-repo
+version: 0.0.1
+
+modules:
+ - name: GeneraliTreinamentoSAPHANA00_appRouter
+   type: approuter.nodejs
+   path: GeneraliTreinamentoSAPHANA00_appRouter
+   parameters:
+      disk-quota: 256M
+      memory: 256M
+   requires:
+    - name: GeneraliTreinamentoSAPHANA00_html5_repo_runtime
+
+
+ - name: GeneraliTreinamentoSAPHANA00_ui_deployer
+   type: com.sap.html5.application-content
+   path: GeneraliTreinamentoSAPHANA00_ui_deployer
+   requires:
+    - name: GeneraliTreinamentoSAPHANA00_html5_repo_host
+
+resources:
+ - name: GeneraliTreinamentoSAPHANA00_html5_repo_runtime
+   parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+   type: org.cloudfoundry.managed-service
+
+ - name: GeneraliTreinamentoSAPHANA00_html5_repo_host
+   parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+   type: org.cloudfoundry.managed-service
+
